@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import Logo from "../assets/Logo.png";
 
 const NavBar = () => {
+  const [nav, setNav] = useState(false);
+
   const links = [
     {
       id: 1,
@@ -30,13 +32,20 @@ const NavBar = () => {
       <div>
         <img className="w-14 m-5" src={Logo} alt="" />
       </div>
-      <ul className="flex">
-        {links.map((id, link) => (
-          <li key={link.id} className="px-4 cursor-pointer capitalize font-medium text-500 hover:scale-105 duration-200">
-            Home
+      <ul className="hidden md:flex">
+        {links.map(({ id, link }) => (
+          <li
+            key={link.id}
+            className="px-4 cursor-pointer capitalize font-medium text-500 hover:scale-105 duration-200"
+          >
+            {link}
           </li>
         ))}
       </ul>
+      <div onClick={() => setNav(!nav)} className="cursor-pointer pr-4 z-10">
+        <FaBars size={30} />
+        {nav ? <FaTimes size={30} /> : <FaBars size={30} />}
+      </div>
     </div>
   );
 };
